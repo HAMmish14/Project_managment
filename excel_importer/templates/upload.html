@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload Excel File</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        form {
+            margin-top: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="file"] {
+            margin-bottom: 10px;
+        }
+        select {
+            margin-bottom: 10px;
+            padding: 5px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            border: none;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Upload Excel File</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="phase">Select Phase:</label>
+            <select name="phase" id="phase" required>
+                <option value="">--Select Phase--</option>
+                <option value="phase1">Phase 1</option>
+                <option value="phase2">Phase 2</option>
+                <option value="phase3">Phase 3</option>
+                <option value="phase4">Phase 4</option>
+                <option value="phase5">Phase 5</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="myfile">Choose an Excel file:</label>
+            <input type="file" name="myfile" id="myfile" accept=".xlsx, .xls" required>
+        </div>
+        <button type="submit">Upload</button>
+    </form>
+</body>
+</html>
