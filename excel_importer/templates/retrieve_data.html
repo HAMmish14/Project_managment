@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retrieve Marks</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        h1, h2 ,h3 {
+            font-size: 2.5em;
+            color: #004085;
+            margin-bottom: 20px;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 30px;
+        }
+
+        label {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            display: block;
+            color: #495057;
+        }
+
+        input[type="text"], select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-size: 1em;
+        }
+
+        button {
+            background-color: #004085;
+            color: #fff;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 1.2em;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #003366;
+        }
+
+        #marksDetails {
+            margin-top: 30px;
+            background-color: #e9ecef;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #ced4da;
+        }
+
+        #marksDetails p {
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            color: #495057;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <h3>Retrieve Marks by USN and Phase</h3>
+        <form id="retrieveForm" method="POST" action="">
+            {% csrf_token %}
+            <label for="usn">Enter USN:</label>
+            <input type="text" id="usn" name="usn" required><br><br>
+
+            <label for="phase">Select Phase:</label>
+            <select id="phase" name="phase" required>
+                <option value="phase1">Phase 1</option>
+                <option value="phase2">Phase 2</option>
+                <option value="phase3">Phase 3</option>
+                <option value="phase4">Phase 4</option>
+                <option value="phase5">Phase 5</option>
+            </select><br><br>
+
+            <button type="submit">Retrieve Marks</button>
+        </form>
+
+        {% if data %}
+        <h2>Marks Details</h2>
+        <div id="marksDetails">
+            <p>USN: {{ data.usn }}</p>
+            <p>Name: {{ data.name }}</p>
+            <p>Criteria A: {{ data.criteria_a }}</p>
+            <p>Criteria B: {{ data.criteria_b }}</p>
+            <p>Criteria C: {{ data.criteria_c }}</p>
+            <p>Criteria D: {{ data.criteria_d }}</p>
+            <p>Criteria E: {{ data.criteria_e }}</p>
+            <p>Criteria F: {{ data.criteria_f }}</p>
+            <p>Score: {{ data.score }}</p>
+            <p>Year: {{ data.year }}</p>
+        </div>
+        {% endif %}
+        <br><br><br><br>
+        <h3>Retrieve Criteria by Name and Phase</h3>
+        <form id="criteriaForm" method="POST" action="">
+            {% csrf_token %}
+            <label for="criteriaName">Enter Criteria Name:</label>
+            <input type="text" id="criteriaName" name="criteriaName" required><br><br>
+
+            <label for="criteriaPhase">Select Phase:</label>
+            <select id="criteriaPhase" name="criteriaPhase" required>
+                <option value="1">Phase 1</option>
+                <option value="2">Phase 2</option>
+                <option value="3">Phase 3</option>
+                <option value="4">Phase 4</option>
+                <option value="5">Phase 5</option>
+            </select><br><br>
+
+            <button type="submit">Retrieve Criteria</button>
+        </form>
+        {% if criteria_data %}
+            <h2>Criteria Details</h2>
+            <div id="criteriaDetails">
+                <p>Criteria ID: {{ criteria_data.criteria_id }}</p>
+                <p>Criteria Name: {{ criteria_data.criteria_name }}</p>
+                <p>Description: {{ criteria_data.description }}</p>
+                <p>Max Marks: {{ criteria_data.max_marks }}</p>
+                <p>Phase Number: {{ criteria_data.phase_number }}</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

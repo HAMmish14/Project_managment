@@ -21,4 +21,5 @@ from excel_importer import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.simple_upload),
+    path('retrieve-data/', views.get_data_by_usn, name='retrieve_data')
 ]
